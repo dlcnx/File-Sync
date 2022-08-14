@@ -3,19 +3,20 @@
 #include <vector>
 #include <regex>
 #include <filesystem>
-#include "json/json.h"
+#include "json.hpp"
+using json = nlohmann::json;
 using namespace std;
 
 class ModClient {
 private:
-    Json::Value info_dirs;
-    Json::Value info_types;
-    Json::Value info_basics;
+    json info_dirs;
+    json info_types;
+    json info_basics;
     vector<vector<string>> local_files;
 public:
     vector<vector<string>> remove_files;
     vector<vector<string>> download_files;
     explicit ModClient(const string &content);
     void createFileList();
-    static bool isExist(const string &str, const Json::Value &list);
+    static bool isExist(const string &str, const json &list);
 };

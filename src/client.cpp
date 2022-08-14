@@ -2,9 +2,8 @@
 
 // 解析字符串并初始化
 ModClient::ModClient(const string &content) {
-    Json::Reader reader;
-    auto *root = new Json::Value;
-    reader.parse(content, *root);
+    auto *root = new json;
+    *root = json::parse(content);
     this->info_dirs = (*root)["dirs"];
     this->info_types = (*root)["file_type"];
     this->info_basics = (*root)["basic"];
@@ -15,7 +14,7 @@ ModClient::ModClient(const string &content) {
 // 遍历目录初始化本地需同步的文件列表
 void ModClient::createFileList() {
     for (const auto &info_dir: this->info_dirs) {
-        string dir_name = info_dir.asString();
+        string dir_name = info_dir;
         // 文件夹不存在则创建
         if (!filesystem::is_directory(dir_name)) {
             filesystem::create_directories(dir_name);
@@ -35,11 +34,9 @@ void ModClient::createFileList() {
     }
 }
 
-bool ModClient::isExist(const string &str, const Json::Value &list) {
-    for (const auto &ext: list) {
-        if (ext.asString() == str) {
-            return true;
-        }
+bool ModClient::isExist(const string &str, const json &list) {
+    if (any_of(list.begin(), list.end(), [&str](const auto &ext){return ext == str;})) {
+        return true;
     }
     return false;
 }

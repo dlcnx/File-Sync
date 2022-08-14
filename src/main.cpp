@@ -15,12 +15,17 @@ string readFile(const string &file_name) {
 
 void test1() {
     string content = readFile("test.json");
+    if (content.empty()) {
+        return;
+    }
     ModClient client(content);
 }
 
 int main() {
-    // 切换系统编码
+    //判断系统并切换编码
+#if defined(WINNT) || defined(_WIN32) || defined(_WIN64)
     system("chcp 65001");
+#endif
     test1();
     return 0;
 }
