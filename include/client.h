@@ -16,7 +16,8 @@ private:
 public:
     vector<vector<string>> remove_files;
     vector<vector<string>> download_files;
-    explicit ModClient(const string &content);
+    explicit ModClient(const json &json_obj);
     void createFileList();
     static bool isExist(const string &str, const json &list);
+    static string getFileHash(const string &file_path);
 };

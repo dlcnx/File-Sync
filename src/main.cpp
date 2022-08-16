@@ -2,23 +2,11 @@
 #include <fstream>
 #include "client.h"
 
-using namespace std;
-
-// 读取文件返回字符串
-string readFile(const string &file_name) {
-    ifstream fin(file_name, ios::in);
-    stringstream buf;
-    buf << fin.rdbuf();
-    fin.close();
-    return buf.str();
-}
-
 void test1() {
-    string content = readFile("test.json");
-    if (content.empty()) {
-        return;
-    }
+    ifstream json_file("test.json");
+    json content = json::parse(json_file);
     ModClient client(content);
+    cout << ModClient::getFileHash("test.json");
 }
 
 int main() {

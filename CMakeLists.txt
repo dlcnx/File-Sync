@@ -1,7 +1,7 @@
 # 设置cmake的最低版本
 cmake_minimum_required(VERSION 3.5)
 # 设置Release构建类型，更小构建体积
-set(CMAKE_BUILD_TYPE "Release")
+# set(CMAKE_BUILD_TYPE "Release")
 # MingW: 全静态编译，避免缺dll
 set(CMAKE_CXX_FLAGS "-static")
 
