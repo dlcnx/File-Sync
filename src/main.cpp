@@ -1,11 +1,13 @@
 #include <fstream>
-#include "handle.h"
+#include "handler.h"
+
+using namespace dlcn;
 
 void test1() {
     ifstream json_file("test.json");
     json content = json::parse(json_file);
-    ModClient client(content);
-    cout << ModClient::getFileHash("test.json");
+    ClientController client(content);
+    cout << ClientController::getFileHash("test.json");
 }
 
 int main() {

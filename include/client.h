@@ -6,29 +6,31 @@
 #include <filesystem>
 #include "json.hpp"
 
-using json = nlohmann::json;
-using namespace std;
+namespace dlcn {
+    using json = nlohmann::json;
+    using namespace std;
 
-class ModClient {
-private:
-    json info_dirs;
-    json info_types;
-    json info_basics;
-    vector<pair<string, string>> local_files;
-public:
-    vector<string> download_files;
-    vector<string> remove_files;
+    class ClientController {
+    private:
+        json info_dirs;
+        json info_types;
+        json info_basics;
+        vector<pair<string, string>> local_files;
+    public:
+        vector<string> download_files;
+        vector<string> remove_files;
 
-    explicit ModClient(const json &json_obj);
+        explicit ClientController(const json &json_obj);
 
-    void createFileList();
+        void createFileList();
 
-    void initUpdateFiles();
+        void initUpdateFiles();
 
-    static bool isExist(const string &str, const json &list);
+        static bool isExist(const string &str, const json &list);
 
-    static string getFileHash(const string &file_path);
+        static string getFileHash(const string &file_path);
 
-    static vector<string> getDifferentFiles(const vector<pair<string, string>> &first_files,
-                                            const vector<pair<string, string>> &second_files);
-};
+        static vector<string> getDifferentFiles(const vector<pair<string, string>> &first_files,
+                                                const vector<pair<string, string>> &second_files);
+    };
+}
